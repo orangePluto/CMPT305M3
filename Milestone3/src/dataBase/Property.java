@@ -29,7 +29,7 @@ public class Property{
 
         for (int i=0;i < accIDs.size();i++){ //Build nArr with relevant prices
             tempEntry = mainTable.get(accIDs.get(i));
-            if (nHood.equals(tempEntry.getNeighbourhood())) {
+            if (nHood.compareTo(tempEntry.getNeighbourhood()) == 0) {
                 nArr.add(tempEntry.getAssessedV());
 				dynamicEntries.add(tempEntry);
             }
@@ -63,11 +63,9 @@ public class Property{
 	public Entry getAddress(String address) {
 		Entry tempEntry = new Entry(); 
 		
-		System.out.println(address);
 		for (int i=0;i < accIDs.size(); i++) {
 			tempEntry = mainTable.get(accIDs.get(i));
 			if ((address.compareTo(tempEntry.getAddress())) == 0) {
-				System.out.println(address+ " found");
 				return tempEntry;
 			}
 		}
@@ -88,8 +86,8 @@ public class Property{
 
         for(int i=0;i < accIDs.size();i++){
             tempEntry = mainTable.get(accIDs.get(i));
-            if ((className.equals(tempEntry.getAssessmentClass())) && 
-					neigh.equals(tempEntry.getNeighbourhood())) {
+            if (((className.compareTo(tempEntry.getAssessmentClass())) == 0) && 
+					(neigh.compareTo(tempEntry.getNeighbourhood()) == 0)) {
                 arrClass.add(tempEntry.getAssessedV());
 				dynamicEntries.add(tempEntry);
             }

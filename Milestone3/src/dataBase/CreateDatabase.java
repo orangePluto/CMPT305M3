@@ -60,7 +60,8 @@ public class CreateDatabase {
         }
 
         if(parser.hasNext()){ //get & set address
-            e.setAddress(parser.next()+" "+parser.next() +" "+ parser.next());
+            e.setAddress((parser.next()+" "+parser.next() +" "+ parser.next())
+			.trim());
         }
 
         parser.next(); parser.next();
