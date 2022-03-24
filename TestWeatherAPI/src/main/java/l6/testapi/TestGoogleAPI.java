@@ -26,7 +26,7 @@ public class TestGoogleAPI {
 	public static void main(String args[]) {
 
 		try {
-			URL url = new URL("https://maps.googleapis.com/maps/api/directions/json?origin=Toronto&destination=Montreal&key=AIzaSyA1i5WBgeXiI6xFq7E2lLl4ghZa1zj7M74");
+			URL url = new URL("https://maps.googleapis.com/maps/api/directions/json?origin=Toronto&destination=Montreal&key=");
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 			conn.setRequestMethod("GET");
 			conn.connect();
