@@ -15,7 +15,7 @@ import java.io.File;
 import java.util.Scanner;
 
 public class PrimaryController {
-	private final String APIKEY = "AIzaSyA1i5WBgeXiI6xFq7E2lLl4ghZa1zj7M74";
+	private final String APIKEY = "";
 	
 	@FXML
     private TextField destinField;
