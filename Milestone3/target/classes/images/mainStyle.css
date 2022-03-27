@@ -1,0 +1,9 @@
+
+/* 
+    Created on : Mar. 26, 2022, 3:50:38 p.m.
+    Author     : dantep
+*/
+ .bodybg{
+ -fx-background-image: url('mainImage.jpg');
+ -fx-background-size: 100% 100%;
+}
