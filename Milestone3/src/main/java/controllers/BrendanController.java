@@ -13,6 +13,7 @@ import javafx.fxml.FXML;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.PieChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -39,6 +40,12 @@ public class BrendanController {
     private Button quitButton;
     private Button graphButton;
     private Button clearButton;
+    
+    @FXML  //PieCharts
+    private PieChart pieChart1;
+    
+    @FXML
+    private PieChart pieChart2;
     
     @FXML  //BarChart
     private BarChart barGraph;
@@ -81,17 +88,27 @@ public class BrendanController {
         if(!(valid)){return;}
         
         if(typeCBox.getSelectionModel().getSelectedIndex() == 0){
+            pieChart1.setVisible(false);
+            pieChart2.setVisible(false);
             barGraph.setVisible(true);
-            createBarChart(valueCBox.getValue(), neigh1Box.getText(), neigh2Box.getText());
+            createBarChart(valueCBox.getValue(), neigh1Box.getText().toUpperCase(), neigh2Box.getText().toUpperCase());
         }
         if(typeCBox.getSelectionModel().getSelectedIndex() == 1){
-            createBarChart("value", "BELMONT", "DUGGAN");
+            barGraph.setVisible(false);
+            pieChart1.setVisible(true);
+            pieChart2.setVisible(true);
+           createPieChart(neigh1Box.getText().toUpperCase(), pieChart1);
+           createPieChart(neigh2Box.getText().toUpperCase(), pieChart2);
         }
     }
     
     @FXML
     void clearPress(ActionEvent event) throws IOException{
-        System.out.println("Test");
+        valueCBox.setValue(null);
+        typeCBox.setValue(null);
+        neigh1Box.clear();
+        neigh2Box.clear();
+        clearErrors();
     }
     
     @FXML
@@ -109,6 +126,17 @@ public class BrendanController {
         
         valueCBox.getItems().addAll("Average Value of Properties", "Number of Total Properties");
         createBarChart("Average Value of Properties", "DUGGAN", "DOWNTOWN");
+    }
+    
+    public void createPieChart(String neighbourhood, PieChart chart){
+        chart.getData().clear();
+        
+        chart.getData().add(new PieChart.Data(neighData.get(neighbourhood).residential.getAClass(),neighData.get(neighbourhood).residential.getCount()));
+        chart.getData().add(new PieChart.Data(neighData.get(neighbourhood).otherResidential.getAClass(),neighData.get(neighbourhood).otherResidential.getCount()));
+        chart.getData().add(new PieChart.Data(neighData.get(neighbourhood).commercial.getAClass(),neighData.get(neighbourhood).commercial.getCount()));
+        chart.getData().add(new PieChart.Data(neighData.get(neighbourhood).farmland.getAClass(),neighData.get(neighbourhood).farmland.getCount()));
+        
+        chart.setTitle("Number of Properties in " + neighbourhood.toLowerCase());
     }
     
     public void createBarChart(String values, String n1, String n2){
@@ -147,10 +175,10 @@ public class BrendanController {
         if("".equals(neigh2Box.getText())){ 
             neigh2Error.setText("Error! No Value Entered");
             verification = false;}
-        if(!(neighData.containsKey(neigh1Box.getText()))){ 
+        if(!(neighData.containsKey(neigh1Box.getText().toUpperCase()))){ 
             neigh1Error.setText("Neighbourhood not Found.\nEnter Valid Neighbourhood");
             verification = false;}
-        if(!(neighData.containsKey(neigh2Box.getText()))){ 
+        if(!(neighData.containsKey(neigh2Box.getText().toUpperCase()))){ 
             neigh2Error.setText("Neighbourhood not Found.\nEnter Valid Neighbourhood");
             verification = false;}
         return verification;

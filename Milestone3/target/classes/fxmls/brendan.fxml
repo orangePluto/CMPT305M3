@@ -21,10 +21,10 @@
           <NumberAxis fx:id="yAxis" label="Values" side="LEFT" />
         </yAxis>
       </BarChart>
-      <PieChart layoutX="14.0" layoutY="73.0" prefHeight="441.0" prefWidth="500.0" title="pie 1" visible="false" />
-      <PieChart layoutX="514.0" layoutY="73.0" prefHeight="441.0" prefWidth="500.0" title="pie 2" visible="false" />
-      <ComboBox fx:id="valueCBox" layoutX="49.0" layoutY="514.0" onAction="#valueSelection" prefHeight="25.0" prefWidth="186.0" promptText="Type of Values to Compare" />
-      <ComboBox fx:id="typeCBox" layoutX="264.0" layoutY="514.0" prefWidth="150.0" promptText="Type of Graph" />
+      <PieChart fx:id="pieChart1" labelLineLength="10.0" layoutX="16.0" layoutY="45.0" prefHeight="441.0" prefWidth="497.0" />
+      <PieChart fx:id="pieChart2" labelLineLength="10.0" layoutX="519.0" layoutY="45.0" prefHeight="441.0" prefWidth="497.0" />
+      <ComboBox fx:id="valueCBox" layoutX="49.0" layoutY="514.0" onAction="#valueSelection" prefHeight="25.0" prefWidth="186.0" />
+      <ComboBox fx:id="typeCBox" layoutX="264.0" layoutY="514.0" prefWidth="150.0" />
       <TextField fx:id="neigh1Box" layoutX="440.0" layoutY="514.0" />
       <TextField fx:id="neigh2Box" layoutX="615.0" layoutY="514.0" />
       <Button fx:id="graphButton" layoutX="803.0" layoutY="514.0" mnemonicParsing="false" onAction="#graphPress" prefHeight="25.0" prefWidth="49.0" text="Graph" />
@@ -37,5 +37,7 @@
       <Text fx:id="valueError" fill="#fc1616" layoutX="49.0" layoutY="558.0" strokeType="OUTSIDE" strokeWidth="0.0" />
       <Text fx:id="neigh1Error" fill="#fc1616" layoutX="440.0" layoutY="558.0" strokeType="OUTSIDE" strokeWidth="0.0" />
       <Text fx:id="neigh2Error" fill="#fc1616" layoutX="615.0" layoutY="558.0" strokeType="OUTSIDE" strokeWidth="0.0" />
+      <Text layoutX="70.0" layoutY="506.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Types of Values to Compare" />
+      <Text layoutX="301.0" layoutY="507.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Type of Graph" wrappingWidth="75.140625" />
    </children>
 </AnchorPane>
