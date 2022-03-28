@@ -6,8 +6,6 @@ import dataBase.Neighbourhood;
 import dataBase.Property;
 import java.io.IOException;
 import java.util.HashMap;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.chart.BarChart;
@@ -35,6 +33,12 @@ public class BrendanController {
     @FXML
     private Text neigh2Error;
     
+    @FXML
+    private Text cFilterError;
+    
+    @FXML
+    private Text classFilterText;
+    
     @FXML  //Buttons
     private Button mainButton;
     private Button quitButton;
@@ -60,6 +64,9 @@ public class BrendanController {
     private ComboBox<String> valueCBox;
     
     @FXML
+    private ComboBox classFilterCB;
+    
+    @FXML
     private ComboBox typeCBox;
     
     @FXML
@@ -69,7 +76,7 @@ public class BrendanController {
     private TextField neigh2Box;
             
     Property database = CreateDatabase.createDB(getClass().getResource("/data/Property_Assessment_Data.csv"));
-    private HashMap<String, Neighbourhood> neighData = getNeighbourhoodData();
+    private final HashMap<String, Neighbourhood> neighData = getNeighbourhoodData();
     
     @FXML
     void mainPress(ActionEvent event) throws IOException {
@@ -109,11 +116,18 @@ public class BrendanController {
         neigh1Box.clear();
         neigh2Box.clear();
         clearErrors();
+        classFilterCB.setVisible(false);
+        classFilterCB.setValue(null);
+        classFilterText.setVisible(false);
     }
     
     @FXML
     void valueSelection(ActionEvent event){
         typeCBox.getItems().clear();
+        classFilterCB.setVisible(false);
+        classFilterCB.setValue(null);
+        classFilterText.setVisible(false);
+        
         if(valueCBox.getSelectionModel().getSelectedIndex() == 0){
             typeCBox.getItems().addAll("Bar Chart");
         }
@@ -122,10 +136,26 @@ public class BrendanController {
         }
     }
     
+    @FXML
+    void filterSelection(ActionEvent event){
+        if(typeCBox.getSelectionModel().getSelectedIndex() == 0){
+            classFilterCB.setVisible(true);
+            classFilterText.setVisible(true);
+        }
+        else if(typeCBox.getSelectionModel().getSelectedIndex() == 1){
+            classFilterCB.setVisible(false);
+            classFilterCB.setValue(null);
+            classFilterText.setVisible(false);
+        }
+    }
+    
     public void initialize(){
         
-        valueCBox.getItems().addAll("Average Value of Properties", "Number of Total Properties");
+        classFilterCB.getItems().addAll("All Assessment Classes", "Residential", "Other Residential", "Commercial", "Farmland");
+        classFilterCB.setValue("All Assessment Classes");
+        valueCBox.getItems().addAll("Average Value of Properties", "Total Number of Properties");
         createBarChart("Average Value of Properties", "DUGGAN", "DOWNTOWN");
+        classFilterCB.setValue(null);
     }
     
     public void createPieChart(String neighbourhood, PieChart chart){
@@ -136,7 +166,7 @@ public class BrendanController {
         chart.getData().add(new PieChart.Data(neighData.get(neighbourhood).commercial.getAClass(),neighData.get(neighbourhood).commercial.getCount()));
         chart.getData().add(new PieChart.Data(neighData.get(neighbourhood).farmland.getAClass(),neighData.get(neighbourhood).farmland.getCount()));
         
-        chart.setTitle("Number of Properties in " + neighbourhood.toLowerCase());
+        chart.setTitle("Distribution of Assessment Classes in " + neighbourhood.toLowerCase());
     }
     
     public void createBarChart(String values, String n1, String n2){
@@ -145,19 +175,27 @@ public class BrendanController {
         XYChart.Series series2 = new XYChart.Series();
         series1.setName(n1);
         series2.setName(n2);
+        yAxis.setLabel(values);
         
-        series1.getData().add(new XYChart.Data(neighData.get(n1).residential.getAClass(), neighData.get(n1).residential.getData(values)));
-        series2.getData().add(new XYChart.Data(neighData.get(n2).residential.getAClass(), neighData.get(n2).residential.getData(values)));
+        if(classFilterCB.getSelectionModel().getSelectedIndex() == 0 || classFilterCB.getSelectionModel().getSelectedIndex() == 1){
+            series1.getData().add(new XYChart.Data(neighData.get(n1).residential.getAClass(), neighData.get(n1).residential.getData(values)));
+            series2.getData().add(new XYChart.Data(neighData.get(n2).residential.getAClass(), neighData.get(n2).residential.getData(values)));
+        }
         
-        series1.getData().add(new XYChart.Data(neighData.get(n1).otherResidential.getAClass(), neighData.get(n1).otherResidential.getData(values)));
-        series2.getData().add(new XYChart.Data(neighData.get(n2).otherResidential.getAClass(), neighData.get(n2).otherResidential.getData(values)));
+        if(classFilterCB.getSelectionModel().getSelectedIndex() == 0 || classFilterCB.getSelectionModel().getSelectedIndex() == 2){
+            series1.getData().add(new XYChart.Data(neighData.get(n1).otherResidential.getAClass(), neighData.get(n1).otherResidential.getData(values)));
+            series2.getData().add(new XYChart.Data(neighData.get(n2).otherResidential.getAClass(), neighData.get(n2).otherResidential.getData(values)));
+        }
         
-        series1.getData().add(new XYChart.Data(neighData.get(n1).commercial.getAClass(), neighData.get(n1).commercial.getData(values)));
-        series2.getData().add(new XYChart.Data(neighData.get(n2).commercial.getAClass(), neighData.get(n2).commercial.getData(values)));
+        if(classFilterCB.getSelectionModel().getSelectedIndex() == 0 || classFilterCB.getSelectionModel().getSelectedIndex() == 3){
+            series1.getData().add(new XYChart.Data(neighData.get(n1).commercial.getAClass(), neighData.get(n1).commercial.getData(values)));
+            series2.getData().add(new XYChart.Data(neighData.get(n2).commercial.getAClass(), neighData.get(n2).commercial.getData(values)));
+        }
         
-        series1.getData().add(new XYChart.Data(neighData.get(n1).farmland.getAClass(), neighData.get(n1).farmland.getData(values)));
-        series2.getData().add(new XYChart.Data(neighData.get(n2).farmland.getAClass(), neighData.get(n2).farmland.getData(values)));
-        
+        if(classFilterCB.getSelectionModel().getSelectedIndex() == 0 || classFilterCB.getSelectionModel().getSelectedIndex() == 4){
+            series1.getData().add(new XYChart.Data(neighData.get(n1).farmland.getAClass(), neighData.get(n1).farmland.getData(values)));
+            series2.getData().add(new XYChart.Data(neighData.get(n2).farmland.getAClass(), neighData.get(n2).farmland.getData(values)));
+        }
         barGraph.getData().addAll(series1, series2);
     }
  
@@ -168,7 +206,10 @@ public class BrendanController {
             verification = false;}
         if(typeCBox.getValue() == null) { 
             typeError.setText("Error! Please Select an Option");
-           verification = false;}
+            verification = false;}
+        if(classFilterCB.isVisible() && classFilterCB.getValue() == null) { 
+            cFilterError.setText("Error! Please Select an Option");
+            verification = false;}
         if("".equals(neigh1Box.getText())){ 
             neigh1Error.setText("Error! No Value Entered");
             verification = false;}
@@ -189,6 +230,7 @@ public class BrendanController {
         typeError.setText("");
         neigh1Error.setText("");
         neigh2Error.setText("");
+        cFilterError.setText("");
     } 
     
     public HashMap<String, Neighbourhood> getNeighbourhoodData(){

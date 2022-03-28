@@ -59,7 +59,7 @@ public class PrimaryController {
 	//Go to Brendan's feature
 	@FXML
     void switchToBrendan(ActionEvent event) throws IOException {
-		App.setNewScene("/fxmls/brendan", 1032, 739);
+		App.setNewScene("/fxmls/brendan", 1037, 640);
     }
 
 }

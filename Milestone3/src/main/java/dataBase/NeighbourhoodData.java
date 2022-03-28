@@ -37,7 +37,7 @@ public class NeighbourhoodData {
             if(count == 0){return 0.0;}
             else{return (totalVal/count);}   
         }
-        else if ("Number of Total Properties".equals(filter)){
+        else if ("Total Number of Properties".equals(filter)){
             Double d = new Double(count);
             return d;
         } 
