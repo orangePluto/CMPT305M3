@@ -15,9 +15,6 @@ public class PrimaryController {
     private MenuItem nathansOption;
 	
     @FXML
-    private MenuItem placesItem;
-
-    @FXML
     private MenuItem quitButton;
 	
 	@FXML
@@ -38,10 +35,17 @@ public class PrimaryController {
 		App.setNewScene("/fxmls/table", 1227, 609);
     }
 	
-	/**Go to Damion's feature**/
+	/**
+	 * This page, called House View, provides the user with a 
+	 * street view of the property.
+	 * 
+	 * @param event isn't used
+	 * @throws IOException thrown when fxml file (viewHouse.fxml) isn't found
+	 * @author feature/page by Damion Dhillon Shillinglaw
+	 */
     @FXML
-    void switchToPlaces(ActionEvent event) throws IOException {
-		App.setRoot("/fxmls/damion");
+    void switchToHouseView(ActionEvent event) throws IOException {
+		App.setNewScene("/fxmls/houseView",895,582);
     }
 	
 	//Go to Nathan's feature

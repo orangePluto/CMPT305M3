@@ -1,2 +1,13 @@
+dataBase/Property.class
+controllers/PrimaryController.class
 main/App.class
+controllers/houseViewController.class
+dataBase/CreateDatabase.class
+m3Modules/BuildMessage.class
+m3Modules/Statistics.class
+controllers/TableController.class
 module-info.class
+dataBase/Entry.class
+controllers/JamieController.class
+controllers/NathanController.class
+controllers/BrendanController.class

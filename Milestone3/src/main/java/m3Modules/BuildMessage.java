@@ -53,22 +53,32 @@ public class BuildMessage {
         }
 
         /**
-         * Displays statistical values associated with account number (unique value)
-         * 
+         * Builds a message from Entry's fields for a property
+         * Pre: e MUST be a valid Entry
          * @param e is an Entry object containing data associated with account number
+		 * @return message.toString() is the message built
          */
-        public static void propertyOutput(Entry e) {
-            if (e.isEntry()) { //check if e is a valid entry 
-                System.out.println("Address = " + e.getAddress());
-                System.out.println("Assessed value = " + Math.round(e.getAssessedV()));
-                System.out.println("Assessment class = " + e.getAssessmentClass());
-                System.out.println("Neighbourhood = " + e.getNeighbourhood()
-                    + " (" + e.getWard() + ")");
-                //System.out.println("Location = " + e.getLocation());
-            } else { //Not an identifiable account id
-                System.out.println("Invalid account ID: " + e.getAccountId());
-            }
-            System.out.println("\n\n");
+        public static String buildPropertyMessage(Entry e) {
+			DecimalFormat formatter = new DecimalFormat("#,###");
+			StringBuilder message = new StringBuilder();
+			
+			message.append("Assessed value: $");
+			message.append(formatter.format(e.getAssessedV()));
+			message.append("\n");
+			message.append("Assessment class: ");
+			message.append(e.getAssessmentClass());
+			message.append("\n");
+			message.append("Neighbourhood: "); 
+			message.append(e.getNeighbourhood());
+			message.append("\n");
+			message.append("Geometry: (");
+			message.append(e.getLatitude());
+			message.append(",");
+			message.append(e.getLongitude());
+			message.append(")\n");
+			
+			return message.toString();
+				
         }
 
         /**

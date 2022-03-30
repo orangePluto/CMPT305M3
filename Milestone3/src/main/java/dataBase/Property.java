@@ -53,25 +53,6 @@ public class Property{
         }
         return allArr;
     }
-	
-	/**
-	 * get entry by address
-	 * 
-	 * @param address is searched for
-	 * @return null if not found otherwise return entry
-	 */
-	public Entry getAddress(String address) {
-		Entry tempEntry = new Entry(); 
-		
-		for (int i=0;i < accIDs.size(); i++) {
-			tempEntry = mainTable.get(accIDs.get(i));
-			if ((address.compareTo(tempEntry.getAddress())) == 0) {
-				return tempEntry;
-			}
-		}
-		
-		return null;
-	}
 
     /**
      *Query by only assessment class or by assessment class and neighborhoud 
@@ -108,39 +89,9 @@ public class Property{
         }
         return arrClass;
     }
-
-    /**
-     *Query by account id 
-     * 
-     * @param accountId is a unique value in database (int)
-     * @return use accountId to find Entry object in mainTable, if
-     *         doesn't exist return a null Entry, i.e. e.SetExists
-	 *         field becomes false
-     */
-    public Entry getAccount(int accountId) {
-            Entry e = new Entry();
-        if (mainTable.containsKey(accountId)) {
-            e = mainTable.get(accountId);
-        } else { 
-            e.setExists(false);
-            e.setId(accountId);
-        }
-
-        return e;
-    }
     
-    /**
-     * Get all entries from database
-     * @return 
-     */
-    public List<Entry> getAllEntries() {
-		List<Entry> copy = new ArrayList<>(entries);
-        return copy;
-    }
-	
-	
 	/**
-	 * This method is used when building data base (i.e. a Property object)
+	 * Used when initializing data base and, after, adding entries
 	 * @param newEntry data entry added to database
 	 */
 	public void addEntry(Entry newEntry) {
@@ -148,5 +99,49 @@ public class Property{
 		entries.add(newEntry);
 		accIDs.add(newEntry.getAccountId());
 	}
+	
+	/**
+	 * Get entry by account id
+	 * 
+	 * @param accId an int value used to find entry in data base
+	 * @return e is a found entry otherwise null
+	 */
+	public Entry getEntry(int accId) {
+		Entry e = new Entry();
+		
+		if (mainTable.containsKey(accId)) {
+			e = mainTable.get(accId);
+		} else e = null;
+		
+		return e;
+	}
+	
+	/**
+	 * Get entry by address
+	 * 
+	 * @param address is a string used to find entry in data base
+	 * @return e is a found entry otherwise null
+	 */
+	public Entry getEntry(String address) {
+		Entry tempEntry = new Entry();
+		
+		for (int i=0;i < accIDs.size(); i++) {
+			tempEntry = mainTable.get(accIDs.get(i));
+			if ((address.compareTo(tempEntry.getAddress())) == 0) {
+				return tempEntry;
+			}
+		}
+		
+		return null;
+	}
+	
+	 /**
+     * Get all entries from database
+     * @return 
+     */
+    public List<Entry> getAllEntries() {
+		List<Entry> copy = new ArrayList<>(entries);
+        return copy;
+    }
 	
 }
