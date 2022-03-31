@@ -12,7 +12,7 @@
                 <MenuItem fx:id="placesItem" mnemonicParsing="false" onAction="#switchToPlaces" text="Damions feature" />
                 <MenuItem fx:id="nathansOption" mnemonicParsing="false" onAction="#switchToNathans" text="Nathans feature" />
                 <MenuItem fx:id="jamieOption" mnemonicParsing="false" onAction="#switchToJamie" text="Jamies feature" />
-                <MenuItem fx:id="brendanOption" mnemonicParsing="false" onAction="#switchToBrendan" text="Brendans Feature" />
+                <MenuItem fx:id="brendanOption" mnemonicParsing="false" onAction="#switchToBrendan" text="Chart View" />
                 <MenuItem fx:id="quitButton" mnemonicParsing="false" onAction="#quitPress" text="Quit" />
             </items>
         </MenuButton>
