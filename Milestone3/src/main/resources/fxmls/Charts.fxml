@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="640.0" prefWidth="1037.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.BrendanController">
+<AnchorPane id="AnchorPane" prefHeight="640.0" prefWidth="1037.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ChartsController">
    <children>
       <Button fx:id="mainButton" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#mainPress" text="Main" />
       <BarChart fx:id="barGraph" animated="false" layoutX="14.0" layoutY="52.0" prefHeight="433.0" prefWidth="1003.0" title="Property Assessment Data Charts">
