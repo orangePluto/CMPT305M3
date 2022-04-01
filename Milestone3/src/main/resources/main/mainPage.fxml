@@ -9,10 +9,10 @@
         <MenuButton layoutX="309.0" layoutY="242.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="142.0" text=" Menu Options">
             <items>
                 <MenuItem fx:id="tableOption" mnemonicParsing="false" onAction="#switchToTable" text="Table View" />
-                <MenuItem fx:id="placesItem" mnemonicParsing="false" onAction="#switchToPlaces" text="Damions feature" />
+                <MenuItem mnemonicParsing="false" onAction="#switchToHouseView" text="House View" />
                 <MenuItem fx:id="nathansOption" mnemonicParsing="false" onAction="#switchToNathans" text="Nathans feature" />
                 <MenuItem fx:id="jamieOption" mnemonicParsing="false" onAction="#switchToJamie" text="Jamies feature" />
-                <MenuItem fx:id="brendanOption" mnemonicParsing="false" onAction="#switchToBrendan" text="Brendans Feature" />
+                <MenuItem fx:id="brendanOption" mnemonicParsing="false" onAction="#switchToBrendan" text="Chart View" />
                 <MenuItem fx:id="quitButton" mnemonicParsing="false" onAction="#quitPress" text="Quit" />
             </items>
         </MenuButton>

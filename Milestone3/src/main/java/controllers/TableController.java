@@ -194,9 +194,9 @@ public class TableController {
 	
 		try { //process id and search for it in data base
 			accID = Integer.parseInt(id);
-			entry = db.getAccount(accID);
+			entry = db.getEntry(accID);
 			
-			if (entry.isEntry()) {
+			if (entry != null) {
 				List<Entry> singleton = new ArrayList<>();
 				singleton.add(entry);
 				updateTable(singleton);
@@ -216,7 +216,7 @@ public class TableController {
 	 * @param address 
 	 */
 	private void filterByAddress(String address) {
-		Entry e = db.getAddress(address);
+		Entry e = db.getEntry(address);
 		
 		if (e != null) {
 			List<Entry> singleton = new ArrayList<>();

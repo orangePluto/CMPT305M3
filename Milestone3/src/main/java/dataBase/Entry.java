@@ -8,8 +8,6 @@ import java.text.*;
  */
 public class Entry {
     DecimalFormat formatter = new DecimalFormat("#,###");
-
-    private Boolean exists;
     private int accountId;
     private String address;
     private double assessedValue;
@@ -18,15 +16,6 @@ public class Entry {
     private String neighbourhood;
     private String latitude;
     private String longitude;
-
-    /**
-     * After finishing entering values for entry, set exists to true or false
-     *
-     * @param v is used to set exists attribute
-     */
-    public void setExists(Boolean v) {
-        this.exists = v;
-    }
 
     /**
      * Set accountId attribute
@@ -90,15 +79,6 @@ public class Entry {
     public void setLocation(String lat, String longt) {
         this.latitude = lat;
         this.longitude = longt;
-    }
-
-    /**
-     * Get exists value
-     *
-     * @return
-     */
-    public Boolean isEntry() {
-        return exists;
     }
 
     /**

@@ -87,7 +87,6 @@ public class CreateDatabase {
         }
         
         parser.close();
-        e.setExists(true);
         return e;
     }
     
