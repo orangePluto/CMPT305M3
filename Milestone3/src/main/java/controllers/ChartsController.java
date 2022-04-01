@@ -228,7 +228,7 @@ public class ChartsController {
         chart.getData().add(new PieChart.Data(neighData.get(neighbourhood).commercial.getAClass(),neighData.get(neighbourhood).commercial.getCount()));
         chart.getData().add(new PieChart.Data(neighData.get(neighbourhood).farmland.getAClass(),neighData.get(neighbourhood).farmland.getCount()));
         
-        chart.setTitle("Distribution of Assessment Classes in " + neighbourhood.toLowerCase());
+        chart.setTitle("Distribution of Assessment Classes in " + neighbourhood.toUpperCase());
     }
     
     /**
