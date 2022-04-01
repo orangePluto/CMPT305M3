@@ -1,17 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.NathanController">
-   <children>
-      <Text fill="#ff1fb4" layoutX="195.0" layoutY="193.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nathan's Blank Feature" wrappingWidth="210.7294921875">
-         <font>
-            <Font size="28.0" />
-         </font>
-      </Text>
-      <Button fx:id="mainButton" layoutX="37.0" layoutY="318.0" mnemonicParsing="false" onAction="#mainPress" prefHeight="53.0" prefWidth="80.0" text="Main" />
-   </children>
-</AnchorPane>
+<SplitPane dividerPositions="0.29797979797979796" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.NathanController">
+  <items>
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+         <children>
+            <Button fx:id="mainButton" layoutX="14.0" layoutY="352.0" mnemonicParsing="false" onAction="#mainPress" prefHeight="31.0" prefWidth="106.0" text="Return to Main" />
+            <Text layoutX="30.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Location Information:">
+               <font>
+                  <Font name="Britannic Bold" size="12.0" />
+               </font>
+            </Text>
+            <TextField fx:id="lat" layoutX="14.0" layoutY="72.0" prefHeight="26.0" prefWidth="65.0" />
+            <TextField fx:id="lon" layoutX="87.0" layoutY="72.0" prefHeight="26.0" prefWidth="65.0" />
+            <Text layoutX="24.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Latitude:" />
+            <Text layoutX="91.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Longitude:" />
+            <Text layoutX="46.0" layoutY="183.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Price Range:">
+               <font>
+                  <Font name="Britannic Bold" size="12.0" />
+               </font>
+            </Text>
+            <TextField fx:id="dist" layoutX="54.0" layoutY="132.0" prefHeight="26.0" prefWidth="65.0" />
+            <Text layoutX="53.0" layoutY="128.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Distance (Km):" />
+            <TextField fx:id="low" layoutX="47.0" layoutY="205.0" prefHeight="26.0" prefWidth="65.0" />
+            <Text layoutX="43.0" layoutY="204.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Lower bound:" />
+            <TextField fx:id="high" layoutX="47.0" layoutY="253.0" prefHeight="26.0" prefWidth="65.0" />
+            <Text layoutX="43.0" layoutY="252.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Upper Bound:" />
+            <Button fx:id="searchButton" layoutX="23.0" layoutY="291.0" mnemonicParsing="false" onAction="#SearchPress" text="Search for Properties" />
+            <Button fx:id="reset" layoutX="23.0" layoutY="317.0" mnemonicParsing="false" onAction="#Reset" text="Reset" />
+         </children></AnchorPane>
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+         <children>
+            <TableView fx:id="table" prefHeight="495.0" prefWidth="959.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <columns>
+                  <TableColumn fx:id="account" prefWidth="125.59991610050201" text="Account" />
+                  <TableColumn fx:id="address" prefWidth="118.40007781982422" text="Address" />
+                  <TableColumn fx:id="assessed" prefWidth="212.79998779296875" text="Assessed Value" />
+                  <TableColumn fx:id="assessment" prefWidth="142.0" text="Assessment Class" />
+                  <TableColumn fx:id="neigh" minWidth="0.0" prefWidth="239.0" text="Neighbourhood" />
+                  <TableColumn fx:id="latitude" prefWidth="144.0" text="Latitude" />
+                  <TableColumn fx:id="longitude" prefWidth="140.0" text="Longtitude" />
+               </columns>
+            </TableView>
+         </children></AnchorPane>
+  </items>
+</SplitPane>
