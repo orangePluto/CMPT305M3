@@ -4,6 +4,7 @@ import dataBase.CreateDatabase;
 import dataBase.Entry;
 import dataBase.Property;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -16,6 +17,9 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.text.Text;
 
 public class NathanController {
     
@@ -50,6 +54,16 @@ public class NathanController {
     private TextField high;
     @FXML
     private TextField low;
+    @FXML
+    private Text eLocation;
+   @FXML
+   private Text errorRange; //this was going to be named 'eRange' to match the 
+                            //naming scheme. But javafx didn't like that name so...
+   @FXML
+   private ImageView mapDisplay;
+   
+   private final String apiKey = "AIzaSyA1i5WBgeXiI6xFq7E2lLl4ghZa1zj7M74";
+
     
     /**
      * Gets a list of all entries within distance of a specific point
@@ -96,6 +110,19 @@ public class NathanController {
         return returnList;
     }
     
+    void updateMapImage(Double Lat, Double Lon){
+        try{
+            System.out.println("https://maps.googleapis.com/maps/api/staticmap?center={"+Lat.toString()+", "+Lon.toString()+"}&zoom=13&size=600x300&maptype=roadmap&markers=color:red&key="+apiKey);
+            //URL url = new URL("https://maps.googleapis.com/maps/api/staticmap?center={"+Lat.toString()+", "+Lon.toString()+"}&zoom=13&size=600x300&maptype=roadmap&markers=color:red&key="+apiKey);
+            //InputStream imageStream = url.openStream();
+            //mapDisplay.setImage(new Image(imageStream));
+            //Do circle thing
+        }catch (Exception e){
+            System.out.println("Failed to connect to web");
+            System.out.println(e);
+        }
+    }
+    
     /**
      * this function is called when the scene is loaded.
      * it initializes the table and reads in all entries from the 
@@ -135,6 +162,8 @@ public class NathanController {
      */
     @FXML
     void SearchPress(ActionEvent event){
+        errorRange.setText("");
+        eLocation.setText("");
         List<Entry> currentItems = entries;
         //Search by distance
         String lats = lat.getText();
@@ -146,15 +175,12 @@ public class NathanController {
                 Double Lon = Double.parseDouble(lons);
                 Double Dist = Double.parseDouble(dists);
                 currentItems = GetEntriesByDistance(currentItems, Lat, Lon, Dist);
+                updateMapImage(Lat,Lon);
             }catch(Exception e){
-                lat.setText("");
-                lon.setText("");
-                dist.setText("");
+                ErrorLocation();
             }
         }else{
-            lat.setText("");
-            lon.setText("");
-            dist.setText("");
+            ErrorLocation();
         }
         //Search by price range
         String highs = high.getText();
@@ -165,14 +191,25 @@ public class NathanController {
             if(Low <= High){
                 currentItems = GetEntriesByPriceRange(currentItems, Low, High);
             }else{
-                high.setText("");
-                low.setText("");
+                ErrorRange();
             }
         }else{
-            high.setText("");
-            low.setText("");
+            ErrorRange();
         }
         table.getItems().setAll(currentItems);
+    }
+    
+    void ErrorLocation(){
+        lat.setText("");
+        lon.setText("");
+        dist.setText("");
+        eLocation.setText("Invalid Location Input");
+    }
+    
+    void ErrorRange(){
+        high.setText("");
+        low.setText("");
+        errorRange.setText("Invalid Price Range");
     }
     
     /**
