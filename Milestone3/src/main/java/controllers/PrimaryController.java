@@ -70,7 +70,7 @@ public class PrimaryController {
 	//Go to Jamie's feature
 	@FXML
     void switchToJamie(ActionEvent event) throws IOException {
-		App.setRoot("/fxmls/jamie");
+		App.setNewScene("/fxmls/jamie", 1031,768);
     }
 	
 	/**
