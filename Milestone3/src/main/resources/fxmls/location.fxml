@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Rectangle2D?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<SplitPane dividerPositions="0.29797979797979796" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="730.0" prefWidth="1155.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.LocationController">
+  <items>
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+         <children>
+            <SplitPane dividerPositions="0.6774725274725274" layoutX="8.0" layoutY="191.0" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+              <items>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="430.0" prefWidth="309.0">
+                     <children>
+                        <Button fx:id="mainButton" layoutX="15.0" layoutY="351.0" mnemonicParsing="false" onAction="#mainPress" prefHeight="31.0" prefWidth="106.0" text="Return to Main" />
+                        <Text layoutX="63.0" layoutY="-9.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Location Information:" x="1.0" y="50.0">
+                           <font>
+                              <Font name="Britannic Bold" size="12.0" />
+                           </font>
+                        </Text>
+                        <TextField fx:id="lat" layoutX="36.0" layoutY="63.0" prefHeight="26.0" prefWidth="65.0" />
+                        <TextField fx:id="lon" layoutX="121.0" layoutY="63.0" prefHeight="26.0" prefWidth="65.0" />
+                        <Text layoutX="41.0" layoutY="9.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Latitude:" y="50.0" />
+                        <Text layoutX="125.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Longitude:" />
+                        <Text layoutX="79.0" layoutY="166.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Price Range:">
+                           <font>
+                              <Font name="Britannic Bold" size="12.0" />
+                           </font>
+                        </Text>
+                        <TextField fx:id="dist" layoutX="80.0" layoutY="110.0" prefHeight="26.0" prefWidth="65.0" />
+                        <Text layoutX="80.0" layoutY="106.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Distance (Km):" />
+                        <TextField fx:id="low" layoutX="79.0" layoutY="192.0" prefHeight="26.0" prefWidth="65.0" />
+                        <Text layoutX="76.0" layoutY="188.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Lower bound:" />
+                        <TextField fx:id="high" layoutX="79.0" layoutY="244.0" prefHeight="26.0" prefWidth="65.0" />
+                        <Text layoutX="75.0" layoutY="240.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Upper Bound:" />
+                        <Button fx:id="searchButton" layoutX="23.0" layoutY="298.0" mnemonicParsing="false" onAction="#SearchPress" text="Search for Properties" />
+                        <Button fx:id="reset" layoutX="164.0" layoutY="298.0" mnemonicParsing="false" onAction="#Reset" text="Reset" />
+                        <Text fx:id="eLocation" fill="RED" layoutX="76.0" layoutY="23.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="82.93670272827148">
+                           <font>
+                              <Font size="8.0" />
+                           </font>
+                        </Text>
+                        <Text fx:id="eRange" fill="RED" layoutX="90.0" layoutY="153.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" ">
+                           <font>
+                              <Font size="8.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </AnchorPane>
+                <AnchorPane fx:id="mapParent" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" onDragDetected="#scaleMap" prefHeight="213.0" prefWidth="309.0">
+                     <children>
+                        <ImageView fx:id="mapDisplay" fitHeight="200.0" fitWidth="338.0" layoutX="37.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <viewport>
+                              <Rectangle2D />
+                           </viewport></ImageView>
+                     </children>
+                  </AnchorPane>
+              </items>
+            </SplitPane>
+         </children></AnchorPane>
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+         <children>
+            <TableView fx:id="table" prefHeight="495.0" prefWidth="519.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <columns>
+                  <TableColumn fx:id="account" prefWidth="125.59991610050201" text="Account" />
+                  <TableColumn fx:id="address" prefWidth="118.40007781982422" text="Address" />
+                  <TableColumn fx:id="assessed" prefWidth="212.79998779296875" text="Assessed Value" />
+                  <TableColumn fx:id="assessment" prefWidth="142.0" text="Assessment Class" />
+                  <TableColumn fx:id="neigh" minWidth="0.0" prefWidth="239.0" text="Neighbourhood" />
+                  <TableColumn fx:id="latitude" prefWidth="144.0" text="Latitude" />
+                  <TableColumn fx:id="longitude" prefWidth="140.0" text="Longtitude" />
+               </columns>
+            </TableView>
+         </children></AnchorPane>
+  </items>
+</SplitPane>

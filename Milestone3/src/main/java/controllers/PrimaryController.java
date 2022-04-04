@@ -64,7 +64,7 @@ public class PrimaryController {
 	//Go to Nathan's feature
 	@FXML
     void switchToNathans(ActionEvent event) throws IOException {
-		App.setRoot("/fxmls/nathan");
+		App.setRoot("/fxmls/location");
     }
 	
 	//Go to Jamie's feature
