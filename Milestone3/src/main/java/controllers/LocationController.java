@@ -23,7 +23,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 
-public class NathanController {
+public class LocationController {
     
     ObservableList<Entry> tableList; //Used for tableview
     List<Entry> entries = new ArrayList<Entry>();
