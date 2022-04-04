@@ -19,6 +19,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 
 public class NathanController {
@@ -57,10 +59,11 @@ public class NathanController {
     @FXML
     private Text eLocation;
    @FXML
-   private Text errorRange; //this was going to be named 'eRange' to match the 
-                            //naming scheme. But javafx didn't like that name so...
+   private Text eRange;
    @FXML
    private ImageView mapDisplay;
+   @FXML
+   private AnchorPane mapParent;
    
    private final String apiKey = "AIzaSyA1i5WBgeXiI6xFq7E2lLl4ghZa1zj7M74";
 
@@ -91,6 +94,31 @@ public class NathanController {
     }
     
     /**
+     * creates parts of a url that relates to drawing a circular path on the map.
+     * it returns this url fragment as a string
+     * @param numberOfPoints number of points to define the circle
+     * @param centerLat latitude of the center of the circle
+     * @param centerLon longitude of the center of the circle
+     * @param radius radius of the circle (in km)
+     * @return string representing the url fragment in relation
+     */
+    String getCircularPoints(int numberOfPoints, Double centerLat, Double centerLon, Double radius){
+        String returnValue = "&path=fillcolor:0x0000ff80|";
+        Double toDegrees = 1/(111.195);//Conversion factor of km to degrees
+        for(Double theta = 0.0; theta < 2*Math.PI; theta+=((2*Math.PI)/numberOfPoints)){
+            Double deltaLat = radius*Math.cos(theta)*toDegrees;
+            Double deltaLon = radius*Math.sin(theta)*toDegrees;
+            Double pointLat = deltaLat+centerLat;
+            Double pointLon = deltaLon+centerLon;
+            returnValue = returnValue+pointLat.toString()+","+pointLon.toString();
+            if(theta+((2*Math.PI)/numberOfPoints) < 2*Math.PI){
+                returnValue+="|";
+            }
+        }
+        return returnValue;
+    }
+    
+    /**
      * Gets a list of entries that are within a specific price range
      * @param data list of all entries included in the search
      * @param minimum the minimum price of an entry
@@ -110,15 +138,23 @@ public class NathanController {
         return returnList;
     }
     
-    void updateMapImage(Double Lat, Double Lon){
+    /**
+     * calls google static map api to get an image of the location
+     * the user has provided. It draws a blue circle encompassing the region
+     * that the properties will be in
+     * @param Lat latitude of the chosen point
+     * @param Lon longitude of the chosen point
+     * @param distance radius (in km) the properties must be within
+     */
+    void updateMapImage(Double Lat, Double Lon, Double distance){
         try{
-            System.out.println("https://maps.googleapis.com/maps/api/staticmap?center={"+Lat.toString()+", "+Lon.toString()+"}&zoom=13&size=600x300&maptype=roadmap&markers=color:red&key="+apiKey);
-            //URL url = new URL("https://maps.googleapis.com/maps/api/staticmap?center={"+Lat.toString()+", "+Lon.toString()+"}&zoom=13&size=600x300&maptype=roadmap&markers=color:red&key="+apiKey);
-            //InputStream imageStream = url.openStream();
-            //mapDisplay.setImage(new Image(imageStream));
-            //Do circle thing
+            int width = (int) Math.floor(mapDisplay.getFitWidth());
+            int height = (int) Math.floor(mapDisplay.getFitHeight());
+            String circleParam = getCircularPoints(20, Lat, Lon,distance);
+            URL url = new URL("https://maps.googleapis.com/maps/api/staticmap?center={"+Lat.toString()+","+Lon.toString()+"}&zoom=7&size="+width+"x"+height+circleParam+"&maptype=roadmap&markers=color:red&key="+apiKey);
+            InputStream imageStream = url.openStream();
+            mapDisplay.setImage(new Image(imageStream));
         }catch (Exception e){
-            System.out.println("Failed to connect to web");
             System.out.println(e);
         }
     }
@@ -142,6 +178,9 @@ public class NathanController {
         neigh.setCellValueFactory(new PropertyValueFactory<>("neighbourhood"));
         
         this.table.setItems(tableList);
+        mapDisplay.fitWidthProperty().bind(mapParent.widthProperty());
+        mapDisplay.fitHeightProperty().bind(mapParent.heightProperty());
+        System.out.println(getCircularPoints(20, 53.0, -113.0, 600.0));
     }
     
     /**
@@ -151,7 +190,7 @@ public class NathanController {
      */
     @FXML
     void mainPress(ActionEvent event) throws IOException {
-	App.setRoot("mainPage");
+	App.setNewScene("mainPage", 760, 537);
     }
     
     /**
@@ -162,7 +201,7 @@ public class NathanController {
      */
     @FXML
     void SearchPress(ActionEvent event){
-        errorRange.setText("");
+        eRange.setText("");
         eLocation.setText("");
         List<Entry> currentItems = entries;
         //Search by distance
@@ -175,7 +214,7 @@ public class NathanController {
                 Double Lon = Double.parseDouble(lons);
                 Double Dist = Double.parseDouble(dists);
                 currentItems = GetEntriesByDistance(currentItems, Lat, Lon, Dist);
-                updateMapImage(Lat,Lon);
+                updateMapImage(Lat,Lon, Dist);
             }catch(Exception e){
                 ErrorLocation();
             }
@@ -204,12 +243,13 @@ public class NathanController {
         lon.setText("");
         dist.setText("");
         eLocation.setText("Invalid Location Input");
+        mapDisplay.setImage(null);
     }
     
     void ErrorRange(){
         high.setText("");
         low.setText("");
-        errorRange.setText("Invalid Price Range");
+        eRange.setText("Invalid Price Range");
     }
     
     /**
@@ -226,6 +266,11 @@ public class NathanController {
         lon.setText("");
         dist.setText("");
         table.getItems().setAll(entries);
+    }
+    
+    @FXML
+    void scaleMap(){
+        
     }
 
 }
