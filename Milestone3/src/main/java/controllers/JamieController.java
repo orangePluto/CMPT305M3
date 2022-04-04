@@ -5,6 +5,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import dataBase.CreateDatabase;
 import dataBase.Entry;
 import dataBase.Property;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -14,6 +16,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
 //import javafx.scene.paint.Color;
@@ -98,6 +101,7 @@ public class JamieController {
         accountTextField.setText("");
         timeTextField.setText("");
         distanceTextField.setText("");
+        notableLocationImageView.setImage(null);
         
     
         if (db == null) {
@@ -131,8 +135,11 @@ public class JamieController {
         if(!accountTextField.getText().equals("")){
             try{
                 int accountNumber = Integer.parseInt(accountTextField.getText());
+                
                 byAccountNumber(accountNumber);
-                inputErrorText.setVisible(false);
+                //setImage(notableLocation);
+                
+                //inputErrorText.setVisible(false);
                 return;
             }
             catch(Exception e){
@@ -140,6 +147,7 @@ public class JamieController {
                 timeTextField.setText("");
                 distanceTextField.setText("");
                 notableLocationTitle.setText("");
+                notableLocationImageView.setImage(null);
                 return;
                 
             }
@@ -149,7 +157,8 @@ public class JamieController {
                 String address = addressTextField.getText();
                 
                 byAddress(address.toUpperCase());
-                //inputErrorText.setVisible(false);
+                //setImage(notableLocation);
+                
                 return;
             }
             catch(Exception e){
@@ -157,6 +166,7 @@ public class JamieController {
                 timeTextField.setText("");
                 distanceTextField.setText("");
                 notableLocationTitle.setText("");
+                notableLocationImageView.setImage(null);
                 return;
                 
             }
@@ -165,6 +175,7 @@ public class JamieController {
         timeTextField.setText("");
         distanceTextField.setText("");
         notableLocationTitle.setText("");
+        notableLocationImageView.setImage(null);
         
         
     }
@@ -213,6 +224,7 @@ public class JamieController {
                     distanceTextField.setText(distance.get("text").toString().replace("\"", ""));
                     inputErrorText.setVisible(false);
                     notableLocationTitle.setText(notableLocation);
+                    setImage(notableLocation);
 
                 } else {
                     distanceTextField.setText("Failed connection!");
@@ -223,11 +235,12 @@ public class JamieController {
         }
         }
         else{
-            System.out.println("Something went wrong");
+            //System.out.println("Something went wrong");
             inputErrorText.setVisible(true);
             timeTextField.setText("");
             distanceTextField.setText("");
             notableLocationTitle.setText("");
+            notableLocationImageView.setImage(null);
         }	
     }
     public void byAddress(String address){
@@ -240,7 +253,7 @@ public class JamieController {
             String destination = notableLocation.replace(" ", "+");
             destination = destination + "+Edmonton+Alberta";
         
-            System.out.println(address);
+            //System.out.println(address);
             try {
                 URL url = 
                         new URL("https://maps.googleapis.com/maps/api/directions/"
@@ -275,6 +288,7 @@ public class JamieController {
                     distanceTextField.setText(distance.get("text").toString().replace("\"", ""));
                     inputErrorText.setVisible(false);
                     notableLocationTitle.setText(notableLocation);
+                    setImage(notableLocation);
 
                 } else {
                     distanceTextField.setText("Failed connection!");
@@ -285,11 +299,25 @@ public class JamieController {
         }
         }
         else{
-            System.out.println("Something went wrong");
             inputErrorText.setVisible(true);
             timeTextField.setText("");
             distanceTextField.setText("");
             notableLocationTitle.setText("");
+            notableLocationImageView.setImage(null);
         }   
+    }
+    public void setImage(String notableLocation){
+        try{
+            String formattedName = notableLocation.replace(" ","_");
+            formattedName.replace("'","");
+            formattedName = formattedName + ".jpg";
+            
+            Image image = new Image(new FileInputStream("src/main/resources/images/"+formattedName));
+
+            notableLocationImageView.setImage(image);
+        }
+        catch(Exception e){
+            System.out.println(e);
+        }
     }
 }
