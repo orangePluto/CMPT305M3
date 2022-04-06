@@ -27,7 +27,7 @@ import main.App;
  * 
  * @author Jamie Czelenski
  */
-public class JamieController {
+public class NotableLocationsController {
     
     // APIKEY is the key needed to use the google maps directions api
     private final String APIKEY = "&key=AIzaSyA1i5WBgeXiI6xFq7E2lLl4ghZa1zj7M74";

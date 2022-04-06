@@ -20,7 +20,7 @@ public class Entry {
     /**
      * Set accountId attribute
      *
-     * @param id
+     * @param id used to set new id 
      */
     public void setId(int id) {
         this.accountId = id;
@@ -29,7 +29,7 @@ public class Entry {
     /**
      * Set address attribute
      *
-     * @param addr
+     * @param addr used to set new address
      */
     public void setAddress(String addr) {
         this.address = addr;
@@ -38,7 +38,7 @@ public class Entry {
     /**
      * Set assessedValue attribute
      *
-     * @param assessedV
+     * @param assessedV used to set new assessed value
      */
     public void setAssessedV(double assessedV) {
         this.assessedValue = assessedV;
@@ -47,7 +47,7 @@ public class Entry {
     /**
      * Set assessmentClass attribute
      *
-     * @param assessmentV
+     * @param assessmentV used to set new assessment
      */
     public void setAssessmentV(String assessmentV) {
         this.assessmentClass = assessmentV;
@@ -56,7 +56,7 @@ public class Entry {
     /**
      * Set ward attribute
      *
-     * @param ward
+     * @param ward used to set new ward
      */
     public void setWard(String ward) {
         this.ward = ward;
@@ -65,7 +65,7 @@ public class Entry {
     /**
      * Set neighbourhood attribute
      *
-     * @param neigh
+     * @param neigh used to set new neighborhoud
      */
     public void setNeigh(String neigh) {
         this.neighbourhood = neigh;
@@ -74,7 +74,7 @@ public class Entry {
     /**
      * Set location, i.e. latitude and longitude attributes
      *
-     * @param lat and longt
+     * @param lat and longt used to set new longitude and latitude  
      */
     public void setLocation(String lat, String longt) {
         this.latitude = lat;
@@ -84,7 +84,7 @@ public class Entry {
     /**
      * Get accountId's value (attribute)
      *
-     * @return
+     * @return accountId of property
      */
     public int getAccountId() {
         return accountId;
@@ -93,12 +93,17 @@ public class Entry {
     /**
      * Get address value (attribute)
      *
-     * @return
+     * @return address of property 
      */
     public String getAddress() {
         return address;
     }
-
+	
+	/**
+	 * Get assessed value
+	 * 
+	 * @return assessedValue of property
+	 */
     public double getAssessedV() {
         return assessedValue;
     }
@@ -106,7 +111,7 @@ public class Entry {
     /**
      * Get assessedValue's value (attribute)
      *
-     * @return
+     * @return clean format for assessedValue
      */
     public String getAssessedValue() {
         return "$"+ formatter.format(this.assessedValue);
@@ -115,7 +120,7 @@ public class Entry {
     /**
      * Get assessmentClass's value (attribute)
      *
-     * @return
+     * @return assessmentClass of property
      */
     public String getAssessmentClass() {
         return assessmentClass;
@@ -124,7 +129,7 @@ public class Entry {
     /**
      * Get ward's value (attribute)
      *
-     * @return
+     * @return ward of property
      */
     public String getWard() {
         return ward;
@@ -133,7 +138,7 @@ public class Entry {
     /**
      * Get neighbourhood's value (attribute)
      *
-     * @return
+     * @return neighbourhood of property
      */
     public String getNeighbourhood() {
         return neighbourhood;
@@ -142,7 +147,7 @@ public class Entry {
     /**
      * Get latitude value (attribute)
      *
-     * @return
+     * @return latitude of property 
      */
     public String getLatitude() {
         return latitude;
@@ -150,7 +155,7 @@ public class Entry {
     
     /**
      * Get longitude value (attribute)
-     * @return 
+     * @return longitude of property
      */
     public String getLongitude() {
         return longitude;

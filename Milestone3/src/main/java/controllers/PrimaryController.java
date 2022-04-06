@@ -12,15 +12,10 @@ import main.App;
  * within the app. It creates a dropdown that lets the user move between each feature
  * by selecting the feature in the dropdown menu. 
  * 
- * @author Damion Dhillon Shillinglaw, Brendan Gillespie
+ * @authors Damion Dhillon Shillinglaw, Brendan Gillespie, Nathan Koop,
+ *         Jamie Czelenski
  */
-public class PrimaryController {
-    @FXML
-    private MenuItem jamieOption;
-	
-    @FXML
-    private MenuItem nathansOption;
-	
+public class PrimaryController {	
     @FXML
     private MenuItem quitButton;
 	
@@ -42,6 +37,9 @@ public class PrimaryController {
 	 *Go table view page: user performs queries on data base of housing
 	 * properties.
 	 * 
+	 *@param event isn't used
+	 *@throws IOException thrown when fxml file (tableView.fxml) isn't found
+	 *@author feature/page by Damion Dhillon Shillinglaw
 	 */
     @FXML
     void switchToTable(ActionEvent event) throws IOException {
@@ -53,7 +51,7 @@ public class PrimaryController {
 	 * street view of the property.
 	 * 
 	 * @param event isn't used
-	 * @throws IOException thrown when fxml file (viewHouse.fxml) isn't found
+	 * @throws IOException thrown when fxml file (houseView.fxml) isn't found
 	 * @author feature/page by Damion Dhillon Shillinglaw
 	 */
     @FXML
@@ -61,9 +59,16 @@ public class PrimaryController {
 		App.setNewScene("/fxmls/houseView",895,582);
     }
 	
-	//Go to Nathan's feature
+	/*
+	 *Switch to LocationsController: allows user to check what properties are
+	  found in a specified location and filtered by a price range.
+	 *
+	 *@param event isn't used
+	 *@throws IOException thrown when fxml file (locations.fxml) isn't found
+	 *@author feature/page by Nathan Koop
+	*/
 	@FXML
-    void switchToNathans(ActionEvent event) throws IOException {
+    void switchToLocations(ActionEvent event) throws IOException {
 		App.setRoot("/fxmls/location");
     }
 	
@@ -71,12 +76,12 @@ public class PrimaryController {
          * Switches to the notable location view, so the user can use this feature
          * 
          * @param event click event
-         * @throws IOException
+         * @throws IOException thrown when fxml file (notable.fxml) isn't found
          * @author feature/page Jamie Czelenski
          */
 	@FXML
-    void switchToJamie(ActionEvent event) throws IOException {
-		App.setNewScene("/fxmls/jamie", 1031,768);
+    void switchToNotable(ActionEvent event) throws IOException {
+		App.setNewScene("/fxmls/notable", 1031,768);
     }
 	
 	/**
@@ -89,7 +94,7 @@ public class PrimaryController {
          * @author feature/page by Brendan Gillespie
          */
 	@FXML
-    void switchToBrendan(ActionEvent event) throws IOException {
+    void switchToCharts(ActionEvent event) throws IOException {
 		App.setNewScene("/fxmls/Charts", 1037, 640);
     }
 
