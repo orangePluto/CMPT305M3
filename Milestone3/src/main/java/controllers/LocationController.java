@@ -24,7 +24,7 @@ import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 
 /**
- *  This class handles all the functions that relate to
+ * This class handles all the functions that relate to
  * the Location and Price Range feature of the application.
  * @author Nathan Koop
  */
