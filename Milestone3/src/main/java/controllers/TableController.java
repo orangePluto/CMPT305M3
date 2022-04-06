@@ -165,7 +165,7 @@ public class TableController {
 	/**
 	 * Update tableview object with data base entries
 	 * 
-	 * @param entries
+	 * @param entries is an Entry object containing data for each property
 	 */
 	private void updateTable(List<Entry> entries) {
 		if (entries != null) {
@@ -213,7 +213,7 @@ public class TableController {
 	 * Handle query by address: update table view and text area
 	 * if address is valid
 	 * 
-	 * @param address 
+	 * @param address is a string containing #suite number, street/ave & direction 
 	 */
 	private void filterByAddress(String address) {
 		Entry e = db.getEntry(address);
@@ -234,8 +234,8 @@ public class TableController {
 	 * if both are valid then update table view and text area, otherwise
 	 * display nothing.
 	 * Pre: pass parameters as null for ignoring for search
-	 * @param neigh
-	 * @param assem 
+	 * @param neigh is a string containing #suite number, street/ave & direction
+	 * @param assem is a string for assessment class
 	 */
 	private void filterByNeighAssem(String neigh, String assem) {
 		ArrayList<Double> arrPrices = new ArrayList<>();

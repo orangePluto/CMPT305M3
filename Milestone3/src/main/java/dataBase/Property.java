@@ -13,7 +13,9 @@ public class Property{
                                                              //and keys(account ids)
     private ArrayList<Integer> accIDs = new ArrayList<>(); //All account ids;keys
     private List<Entry> entries = new ArrayList<>(); //All Entry objects in data base
-	public List<Entry> dynamicEntries = new ArrayList<>(); 
+	public List<Entry> dynamicEntries = new ArrayList<>(); //Filled with most
+	                                                      //properties from most
+	                                                     //recent query
 	
     /**
      *Query done by neighbourhood 
