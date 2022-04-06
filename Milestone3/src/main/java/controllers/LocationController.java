@@ -242,7 +242,11 @@ public class LocationController {
         }
         table.getItems().setAll(currentItems);
     }
-    
+    /**
+     * this function is called when the data given that
+     * relates to location is incorrect.
+     * This clears the input fields and displays the error message
+     */
     void ErrorLocation(){
         lat.setText("");
         lon.setText("");
@@ -251,6 +255,11 @@ public class LocationController {
         mapDisplay.setImage(null);
     }
     
+    /**
+     * this function is called when the data given that
+     * relates to price range is incorrect.
+     * This clears the input fields and displays the error message
+     */
     void ErrorRange(){
         high.setText("");
         low.setText("");
@@ -271,11 +280,6 @@ public class LocationController {
         lon.setText("");
         dist.setText("");
         table.getItems().setAll(entries);
-    }
-    
-    @FXML
-    void scaleMap(){
-        
     }
 
 }

@@ -54,7 +54,7 @@
                         </Text>
                      </children>
                   </AnchorPane>
-                <AnchorPane fx:id="mapParent" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" onDragDetected="#scaleMap" prefHeight="213.0" prefWidth="309.0">
+                <AnchorPane fx:id="mapParent" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" prefHeight="213.0" prefWidth="309.0">
                      <children>
                         <ImageView fx:id="mapDisplay" fitHeight="200.0" fitWidth="338.0" layoutX="37.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <viewport>
