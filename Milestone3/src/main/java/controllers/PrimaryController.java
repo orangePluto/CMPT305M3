@@ -67,7 +67,13 @@ public class PrimaryController {
 		App.setRoot("/fxmls/location");
     }
 	
-	//Go to Jamie's feature
+	/**
+         * Switches to the notable location view, so the user can use this feature
+         * 
+         * @param event click event
+         * @throws IOException
+         * @author feature/page Jamie Czelenski
+         */
 	@FXML
     void switchToJamie(ActionEvent event) throws IOException {
 		App.setNewScene("/fxmls/jamie", 1031,768);
